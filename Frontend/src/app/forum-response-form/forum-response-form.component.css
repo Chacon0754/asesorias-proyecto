@@ -1,0 +1,47 @@
+.response-card {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #e8f5e9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3f51b5;
+    margin-bottom: 10px;
+}
+
+.response-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.file-input {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.file-label {
+    margin-bottom: 5px;
+    color: #3f51b5;
+    font-weight: bold;
+}
+
+button.mat-raised-button {
+    margin-top: 10px;
+    margin-right: 10px;
+    align-self: flex-end;
+}
+
+mat-card-header {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+}

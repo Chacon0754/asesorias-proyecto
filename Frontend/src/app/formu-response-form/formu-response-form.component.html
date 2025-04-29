@@ -1,0 +1,32 @@
+<mat-card class="response-card">
+    <mat-card-header>
+        <mat-card-title class="title">Responder al Post</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form (ngSubmit)="onSubmit()" class="response-form">
+            <mat-form-field appearance="outline">
+                <mat-label>Autor</mat-label>
+                <input matInput [(ngModel)]="response.author" name="author" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Rol</mat-label>
+                <input matInput [(ngModel)]="response.role" name="role" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Contenido</mat-label>
+                <textarea matInput [(ngModel)]="response.content" name="content" required></textarea>
+            </mat-form-field>
+            <div class="file-input">
+                <label class="file-label">Imagen</label>
+                <button mat-raised-button color="primary" (click)="imageInput.click()">Seleccionar Imagen</button>
+                <input id="image-upload" type="file" (change)="onImageSelected($event)" #imageInput hidden>
+            </div>
+            <div class="file-input">
+                <label class="file-label">PDF</label>
+                <button mat-raised-button color="primary" (click)="pdfInput.click()">Seleccionar PDF</button>
+                <input id="pdf-upload" type="file" (change)="onPdfSelected($event)" #pdfInput hidden>
+            </div>
+            <button mat-raised-button color="primary" type="submit">Enviar Respuesta</button>
+        </form>
+    </mat-card-content>
+</mat-card>

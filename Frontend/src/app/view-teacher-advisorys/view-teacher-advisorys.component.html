@@ -1,0 +1,60 @@
+<main>
+    <div class="teacher-list">
+        <table mat-table [dataSource]="advisorys" class="mat-elevation-z8">
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    <!-- Solo un espacio vacío aquí, sin checkbox de selección múltiple -->
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-radio-button (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.select(row) : null"
+                                    [checked]="selection.isSelected(row)">
+                    </mat-radio-button>
+                </td>
+            </ng-container>
+
+            <!-- Materia Column -->
+            <ng-container matColumnDef="materia">
+                <th mat-header-cell *matHeaderCellDef> Materia </th>
+                <td mat-cell *matCellDef="let advisory"> {{advisory.nombre_materia}} </td>
+            </ng-container>
+    
+            <!-- Dia Column -->
+            <ng-container matColumnDef="dia">
+                <th mat-header-cell *matHeaderCellDef> Dia </th>
+                <td mat-cell *matCellDef="let advisory"> {{advisory.dia}} </td>
+            </ng-container>
+    
+            <!-- Hora Column -->
+            <ng-container matColumnDef="hora">
+                <th mat-header-cell *matHeaderCellDef> Hora </th>
+                <td mat-cell *matCellDef="let advisory"> {{advisory.hora_inicio}} </td>
+            </ng-container>
+
+            <!-- Alumno Column -->
+            <ng-container matColumnDef="alumno">
+                <th mat-header-cell *matHeaderCellDef> Alumno </th>
+                <td mat-cell *matCellDef="let advisory"> {{advisory.nombre_alumno}} {{advisory.apellido_alumno}} </td>
+            </ng-container>
+    
+            <!-- modalidad Column -->
+            <ng-container matColumnDef="modalidad">
+                <th mat-header-cell *matHeaderCellDef> Modalidad </th>
+                <td mat-cell *matCellDef="let advisory"> {{advisory.modalidad}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="selection.select(row)"
+                [class.selected]="selection.isSelected(row)">
+            </tr>
+        </table>
+        <div class="button-group">
+            <button mat-raised-button (click)="onCancel()">Regresar</button>
+        <button mat-raised-button color="warn" (click)="deleteSelectedAdvisory()">
+            Eliminar Asesoría
+        </button>
+        </div>
+    </div> 
+</main>

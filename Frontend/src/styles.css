@@ -1,0 +1,79 @@
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: auto;
+}
+
+.content {
+    flex: 1;
+    overflow:auto
+}
+
+h1, h2{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 50px;
+    line-height: 84px;
+    align-items: center;
+    text-align: center;
+    color:#371e49
+}
+
+header {
+    position: relative;
+    background-color:#fff;
+    color: #371e49;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+
+}
+
+div.header-header-2 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 50px;
+    line-height: 84px;
+    align-items: center;
+    text-align: center;
+    color:#371e49
+}
+
+
+.uach-logo {
+    width: 60px;
+    height: auto;
+}
+
+.purple-bar-header {
+    background-color: #371e49;
+    height: 20px;
+    width: 100%;
+}
+
+.purple-bar-footer {
+    background-color: #371e49;;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position:relative;
+    width: 100%;
+    bottom: 0%; 
+    font-size: small;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

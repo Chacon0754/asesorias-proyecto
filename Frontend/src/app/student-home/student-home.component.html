@@ -1,0 +1,43 @@
+<div class="main-container">
+    <div class="student-home-container">
+        <aside class="sidebar left">
+            <div class="profile-info">
+                <img [src]="safeProfilePictureUrl || './assets/images/User.jpg'" alt="User Icon">
+                <input type="file" (change)="onFileSelectedEvent($event)" hidden #fileInput>
+                <p>Bienvenido </p>
+                <p>{{ student.name }} {{student.lastName1}}</p> 
+            </div>
+            <div class="options">
+                <button mat-icon-button [matMenuTriggerFor]="menu" class="mat-button">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" class="mat-menu-panel">
+                    <button mat-menu-item (click)="logOut()" class="mat-menu-item">Salir</button>
+                    <button mat-menu-item (click)="fileInput.click()" class="mat-menu-item">Cambiar foto</button>
+                </mat-menu>
+            </div>
+            <div class="options">
+                <button mat-button class="mat-button" routerLink="/advisory-request-student">Agendar asesoria</button>
+            </div>
+        </aside>
+        <main class="content">
+            <button mat-raised-button color="primary" (click)="toggleNewPostForm()">
+                Nueva Publicación
+            </button>
+            <div *ngIf="showNewPostForm" class="new-post-form">
+                <app-forum-post-form (postCreated)="onPostCreated()"></app-forum-post-form>
+            </div>
+            <app-forum-posts>
+            </app-forum-posts>
+        </main>
+        <aside class="sidebar options">
+            <div class="course-list">
+                <h3>Asesorias</h3>
+                <ul>
+                    <li *ngFor="let advisory of advisorys">{{advisory.dia}}: {{advisory.hora_inicio}}. <br> Docente: {{advisory.nombre_docente}} {{advisory.apellido_docente}}. <br>Materia: {{advisory.nombre_materia}}</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>
+

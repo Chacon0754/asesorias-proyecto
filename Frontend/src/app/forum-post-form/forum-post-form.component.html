@@ -1,0 +1,31 @@
+<mat-card class="post-card">
+    <mat-card-header>
+        <mat-card-title class="title">Nueva Publicación</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form  (ngSubmit)="onSubmit()" class="post-form">
+            <mat-form-field appearance="outline">
+                <mat-label>Autor</mat-label>
+                <input matInput [(ngModel)]="post.author" name="author" disabled>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Rol</mat-label>
+                <input matInput [(ngModel)]="role" name="role" disabled>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Contenido</mat-label>
+                <textarea matInput  [(ngModel)]="post.content" name="content"  required></textarea>
+                
+            </mat-form-field>
+            <div class="file-input">
+                <label for="file-upload" class="file-label">Archivo</label>
+                <button mat-raised-button (click)="triggerFileInputClick()" type="button">Seleccionar</button>
+                <input  id="file-upload" type="file" name="file" (change)="onFileSelected($event)" #fileInput hidden >
+            </div>
+            <div class="button-group">
+                <button mat-raised-button color="primary" class="mat-raised-button" (click)="onSubmit()" type="button">Crear Post</button>
+                <button mat-raised-button color="warn" class="mat-raised-button" (click)="onCancel()" type="button">Cancelar</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

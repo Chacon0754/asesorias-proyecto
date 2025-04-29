@@ -1,0 +1,48 @@
+<main>
+    <div class="welcome-container">
+        <div class="user-icon">
+            <img [src]="safeProfilePictureUrl || './assets/images/User.jpg'" alt="User Icon">
+            <input type="file" (change)="onFileSelectedEvent($event)" hidden #fileInput>
+        </div>
+        <h1>Bienvenido {{admin.name}} {{admin.lastName1}}</h1>
+    </div>
+    <div>
+        <button mat-button [matMenuTriggerFor]="menu" class="btn mat-button">Configuración</button>
+        <mat-menu #menu="matMenu" class="mat-menu-panel">
+            <button mat-menu-item (click)="logOut()" class="mat-menu-item">Salir</button>
+            <button mat-menu-item routerLink="/new-admin" class="mat-menu-item">Crear Administrador</button>
+            <button mat-menu-item (click)="fileInput.click()" class="mat-menu-item">Cambiar foto</button>
+        </mat-menu>
+    </div>
+    <div class="new-options">
+        <button mat-button [matMenuTriggerFor]="alumnosMenu" class="admin-options principal">Alumnos</button>
+        <mat-menu #alumnosMenu="matMenu">
+            <button mat-menu-item routerLink="/new-student" class="admin-options sec">Nuevo Alumno</button>
+            <button mat-menu-item routerLink="/edit-student" class="admin-options sec">Editar Alumno</button>
+            <button mat-menu-item routerLink="/view-student" class="admin-options sec">Ver Alumnos</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="profesoresMenu" class="admin-options principal">Profesores</button>
+        <mat-menu #profesoresMenu="matMenu">
+            <button mat-menu-item routerLink="/new-teacher" class="admin-options sec">Nuevo Docente</button>
+            <button mat-menu-item routerLink="/edit-teacher" class="admin-options sec">Editar Docente</button>
+            <button mat-menu-item routerLink="/view-teacher" class="admin-options sec">Ver Docentes</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="carrerasMenu" class="admin-options principal">Carreras</button>
+        <mat-menu #carrerasMenu="matMenu">
+            <button mat-menu-item routerLink="/new-major" class="admin-options sec">Nueva Carrera</button>
+            <button mat-menu-item routerLink="/edit-major" class="admin-options sec">Editar Carrera</button>
+            <button mat-menu-item routerLink="/view-major" class="admin-options sec">Ver Carreras</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="materiasMenu" class="admin-options principal">Materias</button>
+        <mat-menu #materiasMenu="matMenu">
+            <button mat-menu-item routerLink="/new-course" class="admin-options sec">Nueva Materia</button>
+            <button mat-menu-item routerLink="/edit-course" class="admin-options sec">Editar Materia</button>
+            <button mat-menu-item routerLink="/view-course" class="admin-options sec">Ver Materias</button>
+        </mat-menu>
+    </div>
+</main>
+
+

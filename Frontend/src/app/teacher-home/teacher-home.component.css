@@ -1,0 +1,116 @@
+.student-home-container {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100vh;
+}
+  
+.sidebar {
+  width: 10%;
+  background-color: #FFEAB2; 
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow-y: auto;
+  
+}
+.sidebar.left{
+  width: 15%
+}
+  
+.profile-info {
+  text-align: center;
+}
+  
+.profile-info img {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+  
+.course-list h3 {
+  margin-top: 20px;
+}
+  
+main.content {
+  width: 80%;
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #FFF;
+}
+  
+.publication-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+  
+.publication-section input {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+  
+.publications h2 {
+  margin-bottom: 10px;
+}
+  
+.publication {
+  padding: 10px;
+  background-color: #F0F0F0;
+  margin-bottom: 10px;
+}
+  
+.response {
+  padding-left: 20px;
+  background-color: #E0E0E0;
+  margin-top: 5px;
+}
+
+.responses-input{
+  display:inline-block;
+  margin-right: 5px;
+}
+  
+.btn {
+  background-color: #673ab7;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+button.btn.mat-button{
+  color: white ;
+}
+
+.sidebar.options{
+  display: block;
+}
+
+.options {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boton-adjuntar {
+  
+  background-color: #673ab7;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 5px;
+}
+
+.boton-adjuntar:hover {
+  background-color: #270336;
+}
+
+.input-adjuntar {
+  display: none;
+}
+

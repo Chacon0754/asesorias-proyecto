@@ -1,0 +1,16 @@
+<div class="dialog-container">
+    <h2>Creado Exitosamente: {{data.subject}}</h2>
+    <div>
+        <p *ngIf="data.name"><strong>Nombre:</strong> {{data.name}}</p>
+        <p *ngIf="data.email"><strong>Correo:</strong> {{data.email}}</p>
+        <p *ngIf="data.password"><strong>Contraseña:</strong> {{data.password}}</p>
+        <p *ngIf="data.code"><strong>Clave:</strong> {{data.code}}</p>
+        <p *ngIf="data.semester"><strong>Semestre:</strong> {{data.semester}}</p>
+        <p *ngIf="data.major"><strong>Carrera:</strong> {{data.major}}</p>
+        <p *ngIf="data.teacher"><strong>Maestro:</strong> {{data.teacher}}</p>
+        <p *ngIf="data.course"><strong>Materia:</strong> {{data.course}}</p>
+        <p *ngIf="data.mode"><strong>Modalidad:</strong> {{data.mode}}</p>
+        <p *ngIf="data.schedule"><strong>Horario:</strong> {{data.schedule}}</p>
+    </div>
+    <button mat-button (click)="closeDialog()">Cerrar</button>
+</div>

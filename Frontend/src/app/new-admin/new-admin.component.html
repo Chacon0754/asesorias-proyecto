@@ -1,0 +1,38 @@
+<main class="container">
+    <div class="new-admin-container">
+        <h2>Registro de Administradores</h2>
+        <form #adminForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Nombre(s)</label>
+                    <input type="text" id="name" class="form-control" [(ngModel)]="admin.name" name="name" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="lastName1">Apellido Paterno</label>
+                    <input type="text" id="lastName1" class="form-control" [(ngModel)]="admin.lastName1" name="lastName1" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName2">Apellido Materno</label>
+                    <input type="text" id="lastName2" class="form-control" [(ngModel)]="admin.lastName2" name="lastName2">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Correo</label>
+                    <input type="email" id="email" class="form-control" [(ngModel)]="admin.email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">ID</label>
+                    <input type="text" id="password" class="form-control" [(ngModel)]="admin.id" name="password" required>
+                </div>
+                
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn cancel" (click)="onCancel()">Cancelar</button>
+                <button type="submit" class="btn save">Guardar</button>
+            </div>
+        </form>
+    </div>
+</main>

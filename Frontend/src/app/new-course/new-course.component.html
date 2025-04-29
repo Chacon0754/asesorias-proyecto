@@ -1,0 +1,35 @@
+<main class="container">
+    <div class="new-course-container">
+        <h2>Registro de Materias</h2>
+        <form #courseForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Carrera</mat-label>
+                    <mat-select [(ngModel)]="course.majorId" name="major">
+                        <mat-option *ngFor="let major of allMajors" [value]="major.Id_Carreras">{{major.Nombre_Carrera}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Semestre al que corresponde</mat-label>
+                    <mat-select [(ngModel)]="course.NumberOfSemester" name="Semester">
+                        <mat-option *ngFor="let semester of allSemesters" [value]="semester.id">{{semester.sem}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <label for="courseName">Nombre</label>
+                <input type="text" id="courseName" class="form-control" [(ngModel)]="course.name" name="courseName" required>
+            </div>
+            <div class="form-group">
+                <label for="courseId">Clave</label>
+                <input type="text" id="courseId" class="form-control" [(ngModel)]="course.id" name="courseId" required>
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn cancel" (click)="onCancel()">Cancelar</button>
+                <button type="submit" class="btn save">Guardar</button>
+            </div>
+        </form>
+    </div>
+</main>

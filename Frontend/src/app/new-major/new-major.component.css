@@ -1,0 +1,64 @@
+.container {
+    width: auto;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+
+}
+
+.new-major-container {
+    max-width: 600px;
+    width: auto;
+    min-width: 300px;
+    margin: auto;
+    padding: 40px;
+    background: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2{
+    color:#371e49;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #371e49
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button-group {
+    text-align: right;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn.cancel {
+    background-color: #ccc;
+    color: white;
+}
+
+.btn.save {
+    background-color: #673ab7; /* Purple color */
+    color: white;
+}
+
+.alert.alert-danger{
+    color: red;
+}

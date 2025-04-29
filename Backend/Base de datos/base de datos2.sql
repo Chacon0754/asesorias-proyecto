@@ -1,0 +1,1 @@
+SELECT * FROM uach_as.v_prog;

@@ -1,0 +1,85 @@
+
+
+/* General styling for cards */
+.post-card, .response-card {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Specific styling for post cards */
+.post-card {
+    background-color: #ffffff;
+}
+
+/* Specific styling for response cards */
+.response-card {
+    background-color: #e8f5e9;
+    margin-left: 40px; 
+}
+
+/* Style for titles */
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3f51b5;
+    margin-bottom: 10px;
+}
+
+/* Form styling */
+.post-form, .response-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Styling for form fields */
+mat-form-field {
+    width: 100%;
+}
+
+/* File input styling */
+.file-input {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* File label styling */
+.file-label {
+    margin-bottom: 5px;
+    color: #3f51b5;
+    font-weight: bold;
+}
+
+/* General button styling */
+button {
+    margin-top: 10px;
+    align-self: flex-end;
+}
+
+/* Styling for card headers */
+mat-card-header {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+}
+
+/* Styling for individual responses */
+.response {
+    margin-bottom: 15px;
+}
+
+/* Styling for the responses container */
+.responses-container {
+    margin-left: 20px; /* Hierarchy indicator */
+
+}
+
+/* General styling for mat dividers */
+mat-divider {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+

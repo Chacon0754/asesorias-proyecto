@@ -1,0 +1,56 @@
+<main class="container">
+    <h2>Registro de Docentes</h2>
+    <form (ngSubmit)="onSubmit()" #docenteForm="ngForm">
+        <div class="form-group">
+            <label for="name">Nombre(s)</label>
+            <input type="text" class="form-control" [(ngModel)]="teacher.name" name="nombre" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName1">Apellido Paterno</label>
+            <input type="text" class="form-control" [(ngModel)]="teacher.lastName1" name="apellidoPaterno" id="lastName1" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName2">Apellido Materno</label>
+            <input type="text" class="form-control" [(ngModel)]="teacher.lastName2" name="lastName2" id="lastName2" required>
+        </div>
+        <div class="form-group">
+            <label for="teacher-id">Numero de Empleado</label>
+            <input type="text" class="form-control" [(ngModel)]="teacher.id" name="teacher-id" id="teacher-id" required pattern="^\d{6}$" #schoolId="ngModel">
+            <div *ngIf="schoolId.errors?.['pattern']" class="text-danger">Debe tener exactamente 6 dígitos.</div>
+        </div>
+        <div class="form-group">
+            <label for="email">Correo</label>
+            <input type="email" class="form-control" [(ngModel)]="teacher.email" name="email" id="email" required email #email="ngModel">
+            <small class="form-text text-muted">Formato esperado: (inicial de nombre)(primer apellido)&#64;uach.mx</small>
+            <div *ngIf="email.errors?.['required']" class="text-danger">El correo es obligatorio.</div>
+            <div *ngIf="email.errors?.['email']" class="text-danger">El correo debe tener un formato válido.</div>
+        </div>
+        <mat-form-field appearance="fill" class="mat-form-field">
+            <mat-label>Carrera</mat-label>
+            <mat-select  [(ngModel)]="teacher.majorId" name="majors" (ngModelChange)="onMajorChange()">
+                <mat-option *ngFor="let major of allMajors" [value]="major.Id_Carreras">{{major.Nombre_Carrera}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="mat-form-field">
+            <mat-label>Materias que imparte</mat-label>
+            <mat-select [(ngModel)]="teacher.courseIds" name="courses" multiple (selectionChange)="onCourseSelectionChange($event)">
+                <mat-option *ngFor="let course of allCourses" [value]="course.Id_Materias">{{course.N_Mat}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div>Selecciones actuales: {{ teacher.courseIds | json }}</div>
+        <div class="form-group">
+            <mat-form-field appearance="fill" class="mat-form-field">
+                <mat-label>Horarios Disponibles</mat-label>
+                <mat-select [(ngModel)]="teacher.scheduleIds" name="horarios" multiple>
+                    <mat-option *ngFor="let schedule of allSchedules" [value]="schedule.id_horario">
+                        {{ schedule.dia }}: {{ schedule.hora_inicio }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="button-group">
+            <button type="button" class="btn cancel" (click)="onCancel()">Cancelar</button>
+            <button type="submit" class="btn save">Guardar</button>
+        </div>
+    </form>
+</main> 

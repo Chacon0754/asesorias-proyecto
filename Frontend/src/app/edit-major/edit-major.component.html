@@ -1,0 +1,27 @@
+<main class="container">
+    <div class="new-major-container">
+        <h2>Editar Carreras</h2>
+    <form #majorForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <mat-form-field appearance="fill">
+                <mat-label>Carrera</mat-label>
+                <mat-select [(ngModel)]="major.id" name="major">
+                    <mat-option *ngFor="let major of allMajors" [value]="major.Id_Carreras">{{major.Nombre_Carrera}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <label for="major-name">Nuevo Nombre</label>
+            <input type="text" id="major-name" class="form-control" [(ngModel)]="major.name" name="major-name" required>
+        </div>
+        <div *ngIf="showError" class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
+        <div class="button-group">
+            <button type="button" class="btn cancel" (click)="onCancel()">Cancelar</button>
+            <button type="button" class="btn delete" (click)="onDelete()">Eliminar carrera</button>
+            <button type="submit" class="btn save">Guardar</button>
+        </div>
+    </form>
+    </div>
+</main>

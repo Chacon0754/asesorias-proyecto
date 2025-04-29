@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="text-container">
+        <h2>Asesorías</h2>
+        <p>Facultad de Ingeniería de la Universidad Autónoma de Chihuahua</p>
+    </div>
+    <div class="login">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="text" id="username" formControlName="email" placeholder="Correo Electrónico" class="form-control" [class.is-invalid]="submitted && f['email'].errors">
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                        <div *ngIf="f['email'].errors?.['required']">El correo es requerido</div>
+                        <div *ngIf="f['email'].errors?.['email']">El correo no es válido</div>
+                    </div>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" formControlName="password" placeholder="Contraseña" class="form-control" [class.is-invalid]="submitted && f['password'].errors">
+                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors?.['required']">La contraseña es requerida</div>
+                </div>
+            </div>
+            <button type="submit" class="login-button" >Iniciar Sesión</button>
+        </form>
+        <button type="button" class="forgot-button">¿Olvidaste tu contraseña?</button>
+        <p id="message"></p>
+    </div>
+</div>
+
+
