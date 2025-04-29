@@ -1,0 +1,55 @@
+<main class="container">
+  <div class="advisory-container">
+    <h2>Solicita una asesoría</h2>
+    <form (ngSubmit)="submitForm()">
+      <div class="form-row">
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="mat-form-field">
+            <mat-label>Carrera que está cursando</mat-label>
+            <input matInput [value]="majorName" disabled>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="mat-form-field">
+            <mat-label>Materia en la que necesita ayuda</mat-label>
+            <mat-select [(ngModel)]="advisory.courseId" name="course" (selectionChange)="onCourseChange($event.value)">
+              <mat-option *ngFor="let course of allCourses" [value]="course.id_materia">{{ course.n_mat }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="mat-form-field">
+            <mat-label>Docente que le gustaría que impartiera la asesoría</mat-label>
+            <mat-select [(ngModel)]="advisory.teacherId" name="teacher" (selectionChange)="onTeacherChange($event.value)">
+              <mat-option *ngFor="let teacher of teachers" [value]="teacher.id_docente">{{ teacher.nombre_doc }} {{teacher.apellido}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="mat-form-field">
+            <mat-label>Modalidad</mat-label>
+            <mat-select [(ngModel)]="advisory.mode" name="mode" (selectionChange)="onModalityChange($event.value)">
+              <mat-option *ngFor="let mode of modes" [value]="mode.id">{{ mode.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="mat-form-field">
+            <mat-label>¿Cuándo te gustaría recibir la asesoría?</mat-label>
+            <mat-select [(ngModel)]="advisory.scheduleId" name="days" (selectionChange)="onScheduleChange($event.value)">
+              <mat-option *ngFor="let schedule of allAvailableSchedules" [value]="schedule.id_docente_horario">{{ schedule.dia }}: {{schedule.hora_inicio}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" (click)="onCancel()" class="btn cancel">Cancelar</button>
+        <button type="submit" class="btn save">Solicitar</button>
+      </div>
+    </form>
+  </div>  
+</main>

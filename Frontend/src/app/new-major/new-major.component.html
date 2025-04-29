@@ -1,0 +1,22 @@
+<main class="container">
+    <div class="new-major-container">
+        <h2>Registro de Carreras</h2>
+    <form #majorForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="major-name">Carrera</label>
+            <input type="text" id="major-name" class="form-control" [(ngModel)]="major.name" name="major-name" required>
+        </div>
+        <div class="form-group">
+            <label for="major-id">Clave</label>
+            <input type="text" id="major-id" class="form-control" [(ngModel)]="major.id" name="major-id" required>
+        </div>
+        <div *ngIf="showError" class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
+        <div class="button-group">
+            <button type="button" class="btn cancel" (click)="onCancel()">Cancelar</button>
+            <button type="submit" class="btn save">Guardar</button>
+        </div>
+    </form>
+    </div>
+</main>

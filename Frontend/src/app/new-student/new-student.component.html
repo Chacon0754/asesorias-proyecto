@@ -1,0 +1,57 @@
+<main class="container">
+    <div class="new-student-container">
+        <h2>Registro de Alumnos</h2>
+        <form #alumnoForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Nombre(s)</label>
+                    <input type="text" id="name" class="form-control" [(ngModel)]="student.name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName1">Apellido Paterno</label>
+                    <input type="text" id="lastName1" class="form-control" [(ngModel)]="student.lastName1" name="lastName1" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="lastName2">Apellido Materno</label>
+                    <input type="text" id="lastName2" class="form-control" [(ngModel)]="student.lastName2" name="lastName2">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo</label>
+                    <input type="email" id="email" class="form-control" [(ngModel)]="student.email" name="email" required email #email="ngModel">
+                    <small class="form-text text-muted">Formato esperado: a(matrícula)&#64;uach.mx</small>
+                    <div *ngIf="email.errors?.['required']" class="text-danger">El correo es obligatorio.</div>
+                    <div *ngIf="email.errors?.['email']" class="text-danger">El correo debe tener un formato válido.</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <mat-form-field appearance="fill" class="mat-form-field">
+                        <mat-label>Carrera</mat-label>
+                        <mat-select [(ngModel)]="student.majorId" name="major">
+                            <mat-option *ngFor="let major of allMajors" [value]="major.id_carrera">{{major.nombre_carrera}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <label for="id">Matrícula</label>
+                    <input type="text" id="id" class="form-control" [(ngModel)]="student.schoolId" name="id" required pattern="^\d{6}$" #schoolId="ngModel">
+                    <div *ngIf="schoolId.errors?.['pattern']" class="text-danger">La matrícula debe tener exactamente 6 dígitos.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Semestre al que corresponde</mat-label>
+                    <mat-select [(ngModel)]="student.numberOfSemester" name="Semester">
+                        <mat-option *ngFor="let semester of allSemesters" [value]="semester.id">{{semester.sem}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn cancel" (click)="onCancel()">Cancelar</button>
+                <button type="submit" class="btn save">Guardar</button>
+            </div>
+        </form>
+    </div>
+</main>

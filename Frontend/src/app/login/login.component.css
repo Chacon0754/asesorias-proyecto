@@ -1,0 +1,78 @@
+p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 33px;
+    align-items: center;
+    text-align: center;
+}
+
+.container {
+    margin-top: 100px;
+    display: flex;
+    padding: 10px;
+}
+
+.text-container {
+    flex: 1;
+    padding-right: 20px;
+    color: #371e49;
+    display: grid;
+}
+
+.login {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.invalid-feedback{
+    color: red;
+}
+
+input, button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input {
+    border: 1px solid #ccc;
+}
+
+button {
+    cursor: pointer;
+    transition: background-color 0.3s ease-in;
+}
+
+.login-button {
+    background-color: #371e49;
+    color: #fff;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.forgot-button {
+    border: none;
+    background-color: #fff;
+    color: #371e49;
+    margin-bottom: 20px;
+}
+
+.login-button:hover {
+    background-color: rgba(55, 30, 73, 0.5);
+}
+
+.forgot-button:hover {
+    background-color: #371e49;
+    color: #fff;
+}

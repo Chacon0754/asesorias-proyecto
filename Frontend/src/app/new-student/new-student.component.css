@@ -1,0 +1,88 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-student-container {
+    min-width: 500px;
+    width: auto;
+    max-width: 800px; 
+    padding: 40px;
+    background: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; 
+    align-items:baseline;
+    justify-content: space-between;
+}
+
+h2 {
+    color:#371e49;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.form-group:last-child {
+    margin-right: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #371e49;
+}
+
+.input, .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #371e49;
+    border-radius: 4px;
+}
+
+mat-form-field.mat-form-field {
+    width: 100%;
+    color: #fff;
+
+}
+
+.button-group {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn.save {
+    background-color: #673ab7;
+    color: white;
+}
+
+.btn.cancel {
+    background-color: #ccc;
+    color: white;
+    margin-right: 10px;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
