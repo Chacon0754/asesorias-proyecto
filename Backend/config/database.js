@@ -1,8 +1,7 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize('uach_as', 'root', 'password', {
-    host: '127.0.0.1',
-    dialect: 'mysql'
-});
+const sequelize = new Sequelize(
+  "oracle://uach_as:password@localhost:1521/XEPDB1",
+);
 
 module.exports = sequelize;
