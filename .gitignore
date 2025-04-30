@@ -35,6 +35,7 @@ pnpm-debug.log
 .angular/cache/
 .sass-cache/
 typings/
+.angular/
 
 # Express específico
 coverage/
