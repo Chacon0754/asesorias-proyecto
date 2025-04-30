@@ -14,7 +14,7 @@ CREATE TABLE carrera (
     Id_Carreras INT PRIMARY KEY,
     Nombre_Carrera VARCHAR(60) NOT NULL
     );
-    
+
 create table semestre (
 id int primary key,
 sem varchar (20) not null
@@ -32,7 +32,7 @@ CREATE TABLE docentes (
     id_mat_as int not null,
     id_carrera_mat int not null
     );
-    
+
 Create Table foro (
 id_publicacion Int auto_increment primary key,
 Publicacion VARCHAR(255),
@@ -43,11 +43,11 @@ admin_id int primary key,
 correo VARCHAR(200)NOT NULL,
 contraseña VARCHAR(200)NOT NULL,
 usuario int not null
-); 
+);
 create table usuarios(
 id_user int primary key,
 users varchar(50) not null
-);  
+);
 
 create table asesorias(
 id_as int primary key,
@@ -56,27 +56,17 @@ docente_ases int not null,
 dia varchar(100) not null,
 hora varchar(50) not null
 );
-   
-drop table Administrador;
 
+drop table Administrador;
 
 show tables;
 
 describe alumnos;
 
-insert into semestre(id,sem)
-   Values (9,'Noveno semestre');
-   
-	insert into Carrera(Id_Carreras,Nombre_Carrera)
-   Values (1,'Ingenieria Aeroespacial');
-   alter table docentes add rol_doc varchar(50);
-   alter table docentes change Nombre nombre_doc varchar(100) not null ;
-    alter table docentes drop apellido;
-    
-    Insert into 
-    Materias(Id_Materias,N_Carr,N_Sem,N_Mat)
-    Values (29,1,5,'Probabilidad y estadistica 2');
-   	
+INSERT INTO semestre(id,sem) VALUES (9,'Noveno semestre');
+INSERT INTO Carrera(Id_Carreras,Nombre_Carrera) VALUES (1,'Ingenieria Aeroespacial');
+ALTER TABLE docentes add rol_doc varchar(50);
+ALTER TABLE docentes change Nombre nombre_doc varchar(100) not null ;
+ALTER TABLE docentes drop apellido;
 
-
-
+INSERT INTO Materias(Id_Materias,N_Carr,N_Sem,N_Mat) Values (29,1,5,'Probabilidad y estadistica 2');
