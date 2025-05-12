@@ -109,7 +109,7 @@ app.get("/asesorias/alumno/:id",async (req,res)=>{
       JOIN docente_horario dh ON a.id_docente_horario=dh.id_docente_horario
       JOIN horarios h         ON dh.id_horario       =h.id_horario
       JOIN docentes d         ON dh.id_docente       =d.id_docente
-      JOIN materias m         ON a.id_materia        =m.id_materias
+      JOIN materias m         ON a.id_materia        =m.id_materia
      WHERE a.id_alumno = ?`;
   try{res.json((await runQuery(sql,[req.params.id])).rows);}
   catch(e){res.status(500).json({message:"Error",error:e});}
@@ -194,6 +194,7 @@ app.post("/admin/upload-profile/:id",upload.single("perfil"),async(req,res)=>{
 });
 
 /*────── 6. ALUMNOS (CRUD + foto + vistas) ────────────────────────────*/
+
 app.get("/alumnos", async (_,res)=>{
   try{res.json((await runQuery(`SELECT * FROM alumnos`)).rows);}
   catch(e){res.status(500).json({message:"Error",error:e});}
@@ -231,6 +232,7 @@ app.get("/student/profile-image/:id",async(req,res)=>{
   if(!r.rows.length) return res.status(404).json({message:"Imagen no encontrada"});
   res.json(r.rows[0].PERFIL);
 });
+//Si funciona
 app.post("/alumnos",async(req,res)=>{
   const a=req.body;
   try{

@@ -86,10 +86,10 @@ export class AdvisoryRequestStudentComponent implements OnInit {
         this.teachers = teachers;
         if (this.teachers.length === 1) {
           this.loadSchedulesByTeacherId(this.teachers[0]);
-          const selectedCourse = this.allCourses.find(course => course.Id_Materias === courseId);
+          const selectedCourse = this.allCourses.find(course => course.id_materia === courseId);
           if (selectedCourse) {
-            this.confirmedCourseName = selectedCourse.N_Mat
-            console.log('Curso confirmado: ',this.confirmedCourseName)
+            this.confirmedCourseName = selectedCourse.n_mat
+            console.log('Curso confirmado 2: ',this.confirmedCourseName)
           }
         }
         console.log('Teachers:', this.teachers)
@@ -114,9 +114,9 @@ export class AdvisoryRequestStudentComponent implements OnInit {
   onCourseChange(courseId: number): void {
     this.loadTeachersByCourseId(courseId);
     console.log('id: ', courseId);
-    const selectedCourse = this.allCourses.find(course => course.Id_Materias === courseId);
+    const selectedCourse = this.allCourses.find(course => course.id_materia === courseId);
       if (selectedCourse) {
-        this.confirmedCourseName = selectedCourse.N_Mat
+        this.confirmedCourseName = selectedCourse.n_mat
         console.log('Curso confirmado: ',this.confirmedCourseName)
     }
     

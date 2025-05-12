@@ -13,7 +13,7 @@
           <mat-form-field appearance="fill" class="mat-form-field">
             <mat-label>Materia en la que necesita ayuda</mat-label>
             <mat-select [(ngModel)]="advisory.courseId" name="course" (selectionChange)="onCourseChange($event.value)">
-              <mat-option *ngFor="let course of allCourses" [value]="course.id_materias">{{ course.n_mat }}</mat-option>
+              <mat-option *ngFor="let course of allCourses" [value]="course.id_materia">{{ course.n_mat }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -23,7 +23,7 @@
           <mat-form-field appearance="fill" class="mat-form-field">
             <mat-label>Docente que le gustaría que impartiera la asesoría</mat-label>
             <mat-select [(ngModel)]="advisory.teacherId" name="teacher" (selectionChange)="onTeacherChange($event.value)">
-              <mat-option *ngFor="let teacher of teachers" [value]="teacher.Id_docente">{{ teacher.nombre_doc }} {{teacher.Apellido}}</mat-option>
+              <mat-option *ngFor="let teacher of teachers" [value]="teacher.Id_docente">{{ teacher.nombre_doc }} {{teacher.apellido}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
