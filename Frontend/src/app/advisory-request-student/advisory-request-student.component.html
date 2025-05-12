@@ -13,7 +13,7 @@
           <mat-form-field appearance="fill" class="mat-form-field">
             <mat-label>Materia en la que necesita ayuda</mat-label>
             <mat-select [(ngModel)]="advisory.courseId" name="course" (selectionChange)="onCourseChange($event.value)">
-              <mat-option *ngFor="let course of allCourses" [value]="course.Id_Materias">{{ course.N_Mat }}</mat-option>
+              <mat-option *ngFor="let course of allCourses" [value]="course.id_materias">{{ course.n_mat }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

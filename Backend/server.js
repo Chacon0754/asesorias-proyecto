@@ -98,7 +98,7 @@ app.post("/login", async (req,res)=>{
   }catch(e){console.error(e);res.status(500).json({message:"Error",error:e});}
 });
 
-/*────── 4. ASESORÍAS  (Alumno / Docente + CRUD con transacciones) ────*/
+/*────── 4. ASESORÍAS  (Alumno / Docente + CRUD con transacciones) ────*/ //CORREGIR
 app.get("/asesorias/alumno/:id",async (req,res)=>{
   const sql=`
     SELECT a.id_as,h.dia,h.hora_inicio,
@@ -159,6 +159,7 @@ app.delete("/asesorias/docente/:id", async (req,res)=>{
 });
 
 /*────── 5. ADMINISTRADOR (CRUD + foto) ───────────────────────────────*/
+//Si funciona
 app.post("/admin", async (req,res)=>{
   const {admin_id,correo,contraseña,nombre,apellido1,apellido2,rol}=req.body;
   try{
@@ -169,16 +170,21 @@ app.post("/admin", async (req,res)=>{
     res.status(201).json({message:"Admin creado"});
   }catch(e){res.status(500).json({message:"Error",error:e});}
 });
+
+//Si funciona
 app.get("/admin/:id", async (req,res)=>{
   try{res.json((await runQuery(`SELECT * FROM administrador WHERE admin_id=?`,
                                [req.params.id])).rows);}
   catch(e){res.status(500).json({message:"Error",error:e});}
 });
+//Si funciona
 app.get("/admin/profile-image/:id",async(req,res)=>{
   const r=await runQuery(`SELECT perfil FROM administrador WHERE admin_id=?`,[req.params.id]);
   if(!r.rows.length) return res.status(404).json({message:"Imagen no encontrada"});
   res.json(r.rows[0].PERFIL);
 });
+
+//Si funciona
 app.post("/admin/upload-profile/:id",upload.single("perfil"),async(req,res)=>{
   try{
     await runQuery(`UPDATE administrador SET perfil=? WHERE admin_id=?`,
@@ -192,17 +198,19 @@ app.get("/alumnos", async (_,res)=>{
   try{res.json((await runQuery(`SELECT * FROM alumnos`)).rows);}
   catch(e){res.status(500).json({message:"Error",error:e});}
 });
+//Si funciona
 app.get("/alumnos/:id",async(req,res)=>{
   try{res.json((await runQuery(`SELECT * FROM alumnos WHERE matricula=?`,
                                [req.params.id])).rows);}
   catch(e){res.status(500).json({message:"Error",error:e});}
 });
+//Si funciona
 app.get("/alumnos/carrera/:id", async (req,res)=>{
   const sql=`SELECT alumnos.programa,
-                    carrera.id_carreras AS id_carrera,
+                    carrera.id_carrera AS id_carrera,
                     carrera.nombre_carrera
                FROM alumnos
-               JOIN carrera ON alumnos.programa=carrera.id_carreras
+               JOIN carrera ON alumnos.programa=carrera.id_carrera
               WHERE alumnos.matricula=?`;
   try{
     const r = await runQuery(sql,[req.params.id]);
