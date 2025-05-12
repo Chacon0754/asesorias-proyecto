@@ -4,13 +4,13 @@
             <!-- ID Column -->
             <ng-container matColumnDef="Id_Carreras">
                 <th mat-header-cell *matHeaderCellDef> ID </th>
-                <td mat-cell *matCellDef="let major"> {{major.Id_Carreras}} </td>
+                <td mat-cell *matCellDef="let major"> {{major.id_carrera}} </td>
             </ng-container>
     
             <!-- Nombre Column -->
             <ng-container matColumnDef="Nombre_Carrera">
                 <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                <td mat-cell *matCellDef="let major"> {{major.Nombre_Carrera}} </td>
+                <td mat-cell *matCellDef="let major"> {{major.nombre_carrera}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

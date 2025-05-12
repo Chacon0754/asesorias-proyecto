@@ -271,34 +271,38 @@ app.post("/student/upload-profile/:id",upload.single("perfil"),async(req,res)=>{
 /*────── 7. CARRERAS (CRUD + cascada) ─────────────────────────────────*/
 app.get("/carrera",async(_,res)=>{res.json((await runQuery(`SELECT * FROM carrera`)).rows);});
 app.get("/carreras/ids",async(_,res)=>{
-  const r=await runQuery(`SELECT id_carreras FROM carrera`);
-  res.json(r.rows.map(o=>o.ID_CARRERAS));
+  const r=await runQuery(`SELECT id_carrera FROM carrera`);
+  res.json(r.rows.map(o=>o.ID_CARRERA));
 });
+// ya funciona
 app.post("/carrera",async(req,res)=>{
   try{
-    await runQuery(`INSERT INTO carrera (id_carreras,nombre_carrera) VALUES (?,?)`,
+    await runQuery(`INSERT INTO carrera (id_carrera,nombre_carrera) VALUES (?,?)`,
                    [req.body.Id_Carreras,req.body.Nombre_Carrera]);
     res.status(201).json({message:"Carrera creada"});
   }catch(e){res.status(500).json({message:"Error",error:e});}
 });
+
+// ya funciona
 app.put("/carrera/:id",async(req,res)=>{
   try{
-    await runQuery(`UPDATE carrera SET nombre_carrera=? WHERE id_carreras=?`,
+    await runQuery(`UPDATE carrera SET nombre_carrera=? WHERE id_carrera=?`,
                    [req.body.Nombre_Carrera,req.params.id]);
     res.json({message:"Carrera actualizada"});
   }catch(e){res.status(500).json({message:"Error",error:e});}
 });
+// ya funciona
 app.delete("/carrera/:id",async(req,res)=>{
   const id=req.params.id;
   try{
     await runTx(async c=>{
       await c.execute(`UPDATE docentes SET id_mat_as=0,id_carrera_mat=0 WHERE id_carrera_mat=:id`,{id});
       await c.execute(`DELETE FROM docente_materia WHERE id_materia IN
-                       (SELECT id_materias FROM materias WHERE n_carr=:id)`,{id});
+                       (SELECT id_materia FROM materias WHERE n_carr=:id)`,{id});
       await c.execute(`DELETE FROM asesorias WHERE id_materia IN
-                       (SELECT id_materias FROM materias WHERE n_carr=:id)`,{id});
+                       (SELECT id_materia FROM materias WHERE n_carr=:id)`,{id});
       await c.execute(`DELETE FROM materias WHERE n_carr=:id`,{id});
-      await c.execute(`DELETE FROM carrera WHERE id_carreras=:id`,{id});
+      await c.execute(`DELETE FROM carrera WHERE id_carrera=:id`,{id});
     });
     res.json({message:"Carrera y dependencias eliminadas"});
   }catch(e){res.status(500).json({message:"Error",error:e});}
@@ -530,6 +534,52 @@ app.put("/docentes/:id", async (req, res) => {
     res.status(500).json({ message: "Error al editar docente", error: e });
   }
 });
+
+/*─────────────  DELETE /docentes/:id   (versión Oracle + runTx) ─────────────*/
+app.delete("/docentes/:id", async (req, res) => {
+  const { id } = req.params;      // id_docente
+
+  try {
+    await runTx(async c => {
+
+      /* 1️⃣  Eliminar relaciones DOCENTE_MATERIA */
+      await c.execute(
+        `DELETE FROM docente_materia WHERE id_docente = :id`,
+        { id }
+      );
+
+      /* 2️⃣  Eliminar asesorías asociadas */
+      await c.execute(
+        `DELETE FROM asesorias WHERE id_docente = :id`,
+        { id }
+      );
+
+      /* 3️⃣  Eliminar horarios del docente */
+      await c.execute(
+        `DELETE FROM docente_horario WHERE id_docente = :id`,
+        { id }
+      );
+
+      /* 4️⃣  Finalmente eliminar el docente */
+      const r = await c.execute(
+        `DELETE FROM docentes WHERE id_docente = :id`,
+        { id }
+      );
+      if (r.rowsAffected === 0) {
+        // si no existía, lanzo error para que se haga rollback
+        throw new Error("Docente no encontrado");
+      }
+    });
+
+    res.status(201).json({ message: "Docente eliminado correctamente" });
+    console.log("Docente y dependencias eliminadas (id =", id, ")");
+
+  } catch (e) {
+    console.error("Error al eliminar docente:", e);
+    res.status(500).json({ message: "Error al eliminar docente", error: e });
+  }
+});
+
 
 
 /*──────11. HORARIOS simple ───────────────────────────────────────────*/
