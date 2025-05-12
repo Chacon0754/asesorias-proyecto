@@ -79,7 +79,7 @@ export class EditTeacherComponent {
           this.allCourses = allCourses;
           console.log(this.allCourses);
           this.teacher.courseIds = this.teacher.courseIds.filter(courseId => 
-          this.allCourses.some(course => course.Id_Materias === courseId));
+          this.allCourses.some(course => course.id_materia === courseId));
         }, 
         error: (error) => {
           console.error('Error al cargar materias: ', error);

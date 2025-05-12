@@ -406,6 +406,132 @@ app.post("/docente/upload-profile/:id",upload.single("perfil"),async(req,res)=>{
   res.json({message:"Foto subida"});
 });
 
+/*─────────────  POST /docentes   (versión Oracle + helpers runTx) ─────────────*/
+app.post("/docentes", async (req, res) => {
+  const {
+    Id_docente, nombre_doc, Apellido,
+    id_carrera_mat, id_mat_as = 0,
+    courseIds = [], scheduleIds = [],
+    correo, apei2, perfil, rol_doc,
+    contra_docente
+  } = req.body;
+
+  const hashedPassword = bcrypt.hashSync(contra_docente, 10);
+
+  try {
+    await runTx(async c => {
+
+      /* 1️⃣  Insertar en DOCENTES */
+      await c.execute(
+        `INSERT INTO docentes
+           (id_docente, nombre_doc, apellido, id_mat_as,
+            id_carrera_mat, correo, apei2, perfil,
+            rol_doc, contra_docente)
+         VALUES
+           (:id, :nom, :ape, :mat_as,
+            :carr, :mail, :ape2, :perf,
+            :rol, :pwd)`,
+        {
+          id:   Id_docente,
+          nom:  nombre_doc,
+          ape:  Apellido,
+          mat_as: id_mat_as,
+          carr: id_carrera_mat,
+          mail: correo,
+          ape2: apei2,
+          perf: perfil,
+          rol:  rol_doc,
+          pwd:  hashedPassword
+        }
+      );
+
+      /* 2️⃣  Insertar materias en DOCENTE_MATERIA */
+      if (courseIds.length) {
+        await c.executeMany(
+          `INSERT INTO docente_materia (id_docente, id_materia)
+             VALUES (:1, :2)`,
+          courseIds.map(mid => [Id_docente, mid])
+        );
+      }
+
+      /* 3️⃣  Insertar horarios en DOCENTE_HORARIO  (0 = FALSE) */
+      if (scheduleIds.length) {
+        await c.executeMany(
+          `INSERT INTO docente_horario (id_docente, id_horario, ocupado)
+             VALUES (:1, :2, :3)`,
+          scheduleIds.map(hid => [Id_docente, hid, 0])
+        );
+      }
+    });
+
+    res.status(201).json({ message: "Docente creado correctamente" });
+    console.log("Docente y dependencias insertados");
+
+  } catch (e) {
+    console.error("Error al crear docente:", e);
+    res.status(500).json({ message: "Error al crear docente", error: e });
+  }
+});
+
+
+/*─────────────  PUT /docentes/:id   (versión Oracle + helpers runTx)  ─────────────*/
+//ya funciona
+app.put("/docentes/:id", async (req, res) => {
+  const {
+    nombre_doc, Apellido, id_carrera_mat, id_mat_as,
+    courseIds = [], scheduleIds = [],
+    correo, apei2, perfil, rol_doc
+  } = req.body;
+  const { id } = req.params;          
+  console.log(req.body);
+  try {
+    await runTx(async c => {
+
+      await c.execute(
+        `UPDATE docentes
+            SET nombre_doc      = :nom,
+                apellido        = :ape,
+                id_carrera_mat  = :carr,
+                correo          = :mail,
+                apei2           = :ape2,
+                perfil          = :perf,
+                rol_doc         = :rol
+          WHERE id_docente      = :id`,
+        { nom:nombre_doc, ape:Apellido, carr:id_carrera_mat, mail:correo,
+          ape2:apei2, perf:perfil, rol:rol_doc, id }
+      );
+
+      await c.execute(`DELETE FROM asesorias        WHERE id_docente = :id`,           { id });
+      await c.execute(`DELETE FROM docente_materia  WHERE id_docente = :id`,           { id });
+      await c.execute(`DELETE FROM docente_horario  WHERE id_docente = :id`,           { id });
+
+      if (courseIds.length) {
+        await c.executeMany(
+          `INSERT INTO docente_materia (id_docente, id_materia)
+            VALUES (:1, :2)`,
+          courseIds.map(mid => [id, mid])
+        );
+      }
+
+    
+      if (scheduleIds.length) {
+        await c.executeMany(
+          `INSERT INTO docente_horario (id_docente, id_horario, ocupado)
+            VALUES (:1, :2, :3)`,
+          scheduleIds.map(hid => [id, hid, 0])
+        );
+      }
+    });
+
+    res.status(201).json({ message: "Docente editado correctamente" });
+
+  } catch (e) {
+    console.error("Error al editar docente:", e);
+    res.status(500).json({ message: "Error al editar docente", error: e });
+  }
+});
+
+
 /*──────11. HORARIOS simple ───────────────────────────────────────────*/
 app.get("/horarios",async(_,res)=>{ res.json((await runQuery(`SELECT * FROM horarios`)).rows);});
 
