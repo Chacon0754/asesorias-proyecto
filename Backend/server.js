@@ -336,7 +336,7 @@ app.get("/materias",async(_,res)=>{res.json((await runQuery(`SELECT * FROM mater
 app.get("/materias/carreras",async(_,res)=>{
   const sql=`SELECT m.*, c.nombre_carrera, s.sem AS nombre_semestre
                FROM materias m
-               JOIN carrera  c ON m.n_carr = c.id_carreras
+               JOIN carrera  c ON m.n_carr = c.id_carrera
                JOIN semestre s ON m.n_sem  = s.id`;
   try{res.json((await runQuery(sql)).rows);}
   catch(e){res.status(500).json({message:"Error",error:e});}
@@ -349,7 +349,7 @@ app.get("/materias/:N_Carr",async(req,res)=>{
 app.post("/materias",async(req,res)=>{
   const m=req.body;
   try{
-    await runQuery(`INSERT INTO materias (id_materias,n_carr,n_sem,n_mat)
+    await runQuery(`INSERT INTO materias (id_materia,n_carr,n_sem,n_mat)
                     VALUES (?,?,?,?)`,
                    [m.Id_Materias,m.N_Carr,m.N_Sem,m.N_Mat]);
     res.status(201).json({message:"Materia creada"});
@@ -358,7 +358,7 @@ app.post("/materias",async(req,res)=>{
 app.put("/materias/:id",async(req,res)=>{
   const m=req.body;
   try{
-    await runQuery(`UPDATE materias SET n_carr=?,n_sem=?,n_mat=? WHERE id_materias=?`,
+    await runQuery(`UPDATE materias SET n_carr=?,n_sem=?,n_mat=? WHERE id_materia=?`,
                    [m.N_Carr,m.N_Sem,m.N_Mat,req.params.id]);
     res.json({message:"Materia actualizada"});
   }catch(e){res.status(500).json({message:"Error",error:e});}
@@ -370,7 +370,7 @@ app.delete("/materias/:id",async(req,res)=>{
       await c.execute(`UPDATE docentes SET id_mat_as=0 WHERE id_mat_as=:id`,{id});
       await c.execute(`DELETE FROM docente_materia WHERE id_materia=:id`,{id});
       await c.execute(`DELETE FROM asesorias WHERE id_materia=:id`,{id});
-      await c.execute(`DELETE FROM materias  WHERE id_materias=:id`,{id});
+      await c.execute(`DELETE FROM materias  WHERE id_materia=:id`,{id});
     });
     res.json({message:"Materia y dependencias eliminadas"});
   }catch(e){res.status(500).json({message:"Error",error:e});}

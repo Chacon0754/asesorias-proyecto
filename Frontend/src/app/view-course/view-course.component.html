@@ -4,8 +4,8 @@
             <mat-label>Seleccionar Carrera</mat-label>
             <mat-select [(value)]="selectedMajor" (selectionChange)="onMajorChange($event.value)">
                 <mat-option value="">Todas las Carreras</mat-option>
-                <mat-option *ngFor="let major of allMajors" [value]="major.Nombre_Carrera">
-                    {{ major.Nombre_Carrera }}
+                <mat-option *ngFor="let major of allMajors" [value]="major.nombre_carrera">
+                    {{ major.nombre_carrera }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
@@ -15,13 +15,13 @@
             <!-- ID Column -->
             <ng-container matColumnDef="Id_Materias">
                 <th mat-header-cell *matHeaderCellDef> ID </th>
-                <td mat-cell *matCellDef="let course"> {{course.Id_Materias}} </td>
+                <td mat-cell *matCellDef="let course"> {{course.id_materia}} </td>
             </ng-container>
     
             <!-- Nombre Column -->
             <ng-container matColumnDef="N_Mat">
                 <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                <td mat-cell *matCellDef="let course"> {{course.N_Mat}} </td>
+                <td mat-cell *matCellDef="let course"> {{course.n_mat}} </td>
             </ng-container>
 
             <!-- Carrera Column -->
