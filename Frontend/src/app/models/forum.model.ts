@@ -6,7 +6,7 @@ export interface Post {
     imageUrl?: string;
     pdfUrl?: string;
     createdAt: Date;
-    Responses?: Response[];
+    responses?: Response[];
 }
 
 export interface Response {

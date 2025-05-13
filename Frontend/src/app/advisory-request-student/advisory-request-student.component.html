@@ -23,7 +23,7 @@
           <mat-form-field appearance="fill" class="mat-form-field">
             <mat-label>Docente que le gustaría que impartiera la asesoría</mat-label>
             <mat-select [(ngModel)]="advisory.teacherId" name="teacher" (selectionChange)="onTeacherChange($event.value)">
-              <mat-option *ngFor="let teacher of teachers" [value]="teacher.Id_docente">{{ teacher.nombre_doc }} {{teacher.apellido}}</mat-option>
+              <mat-option *ngFor="let teacher of teachers" [value]="teacher.id_docente">{{ teacher.nombre_doc }} {{teacher.apellido}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

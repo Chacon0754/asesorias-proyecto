@@ -11,12 +11,16 @@ const oracledb  = require("oracledb");
 const sequelize = require("./config/database");
 const forumRoutes = require("./routes/forum.routes");   // ← se mantiene
 const normalizeKeys = require("./src/middlewares/normalizeKeys");
+console.log("normalizeKeys: ", normalizeKeys);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(normalizeKeys);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+console.log("typeof forumRoutes:", typeof forumRoutes);
+console.log("forumRoutes === express.Router instance?", forumRoutes instanceof require("express").Router);
+
 app.use("/api/forum", forumRoutes);
 app.use((_, res, next) => { res.type("application/json"); next(); });
 
@@ -98,7 +102,8 @@ app.post("/login", async (req,res)=>{
   }catch(e){console.error(e);res.status(500).json({message:"Error",error:e});}
 });
 
-/*────── 4. ASESORÍAS  (Alumno / Docente + CRUD con transacciones) ────*/ //CORREGIR
+/*────── 4. ASESORÍAS  (Alumno / Docente + CRUD con transacciones) ────*/
+//Si funciona
 app.get("/asesorias/alumno/:id",async (req,res)=>{
   const sql=`
     SELECT a.id_as,h.dia,h.hora_inicio,
@@ -115,6 +120,7 @@ app.get("/asesorias/alumno/:id",async (req,res)=>{
   catch(e){res.status(500).json({message:"Error",error:e});}
 });
 
+//Si funciona
 app.get("/asesorias/docente/:id",async (req,res)=>{
   const sql=`
     SELECT a.id_as,a.id_docente_horario,h.dia,h.hora_inicio,
@@ -125,26 +131,55 @@ app.get("/asesorias/docente/:id",async (req,res)=>{
       JOIN docente_horario dh ON a.id_docente_horario=dh.id_docente_horario
       JOIN horarios h         ON dh.id_horario       =h.id_horario
       JOIN alumnos  al        ON a.id_alumno         =al.matricula
-      JOIN materias m         ON a.id_materia        =m.id_materias
+      JOIN materias m         ON a.id_materia        =m.id_materia
      WHERE a.id_docente = ?`;
   try{res.json((await runQuery(sql,[req.params.id])).rows);}
   catch(e){res.status(500).json({message:"Error",error:e});}
 });
 
-app.post("/asesorias", async (req,res)=>{
-  const { id_alumno,id_docente,id_docente_horario,id_materia,modalidad } = req.body;
-  try{
-    await runTx(async c=>{
-      await c.execute(`INSERT INTO asesorias (id_alumno,id_docente,id_docente_horario,id_materia,modalidad)
-                       VALUES (:a,:d,:dh,:m,:mod)`,
-                      {a:id_alumno,d:id_docente,dh:id_docente_horario,m:id_materia,mod:modalidad});
-      await c.execute(`UPDATE docente_horario SET ocupado=1 WHERE id_docente_horario=:dh`,
-                      {dh:id_docente_horario});
+/*────────  POST /asesorias  – conversión de modalidad a 1/0  ────────*/
+//Si funciona
+app.post("/asesorias", async (req, res) => {
+  const {
+    id_alumno,
+    id_docente,
+    id_docente_horario,
+    id_materia,
+    modalidad          // true = Presencial, false = Virtual
+  } = req.body;
+
+  // Oracle -> NUMBER(1): 1 = true, 0 = false
+  const mod = modalidad ? 1 : 0;
+
+  try {
+    await runTx(async c => {
+      /* Insertar asesoría */
+      await c.execute(
+        `INSERT INTO asesorias
+           (id_alumno, id_docente, id_docente_horario, id_materia, modalidad)
+         VALUES (:al, :doc, :dh, :mat, :mod)`,
+        { al: id_alumno, doc: id_docente, dh: id_docente_horario,
+          mat: id_materia, mod }
+      );
+
+      /* Marcar horario como ocupado */
+      await c.execute(
+        `UPDATE docente_horario
+            SET ocupado = 1
+          WHERE id_docente_horario = :dh`,
+        { dh: id_docente_horario }
+      );
     });
-    res.status(201).json({message:"Asesoría creada"})
-  }catch(e){res.status(500).json({message:"Error",error:e});}
+
+    res.status(201).json({ message: "Asesoría creada correctamente" });
+
+  } catch (e) {
+    console.error("Error al crear asesoría:", e);
+    res.status(500).json({ message: "Error al crear asesoría", error: e });
+  }
 });
 
+//Si funciona
 app.delete("/asesorias/docente/:id", async (req,res)=>{
   const { teacherId,scheduleId } = req.body, asesoriaId=req.params.id;
   try{
