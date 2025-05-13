@@ -23,7 +23,11 @@ export class ForumPostsComponent implements OnInit{
 
   loadPosts(): void {
     this.forumService.getPosts().subscribe(posts => {
-      this.posts = posts;
+      this.posts = posts.map((post: any) => ({
+        ...post,
+        createdAt: post.createdat,
+        updatesAt: post.updatedat,
+      }));
       console.log('Post de db: ', posts)
       console.log('Posts en this.posts: ',this.posts)
     });

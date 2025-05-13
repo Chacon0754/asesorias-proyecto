@@ -7,11 +7,11 @@
         </mat-card-header>
         <mat-card-content>
             <p>{{ post.content }}</p>
-            <div *ngIf="post.imageUrl">
-                <img [src]="'http://localhost:3000'+post.imageUrl" alt="Image" style="max-width: 200px;">
+            <div *ngIf="post.imageurl">
+                <img [src]="'http://localhost:3000'+post.imageurl" alt="Image" style="max-width: 200px;">
             </div>
-            <div *ngIf="post.pdfUrl">
-                <a [href]="'http://localhost:3000'+post.pdfUrl" target="_blank">View PDF</a>
+            <div *ngIf="post.pdfurl">
+                <a [href]="'http://localhost:3000'+post.pdfurl" target="_blank">View PDF</a>
             </div>
         </mat-card-content>
         <mat-card-actions>

@@ -3,8 +3,8 @@ export interface Post {
     author: string;
     role: string;
     content: string;
-    imageUrl?: string;
-    pdfUrl?: string;
+    imageurl?: string;
+    pdfurl?: string;
     createdAt: Date;
     responses?: Response[];
 }

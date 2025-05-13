@@ -434,7 +434,8 @@ app.get("/docentes/:id/horarios-disponibles",async(req,res)=>{
   try{res.json((await runQuery(sql,[req.params.id])).rows);}
   catch(e){res.status(500).json({message:"Error",error:e});}
 });
-app.get("/docente/profile-image/:id",async(req,res)=>{
+app.get("/docente/profile-image/:id", async (req, res) => {
+  console.log("Foto llegando: ", req.body)
   const r=await runQuery(`SELECT perfil FROM docentes WHERE id_docente=?`,[req.params.id]);
   if(!r.rows.length) return res.status(404).json({message:"Imagen no encontrada"});
   res.json(r.rows[0].PERFIL);

@@ -65,7 +65,7 @@ export class TeacherService {
   }
   uploadProfileImage(teacherId: number, file: File): Observable<any>{
     const formData = new FormData();
-    formData.append('matricula', teacherId.toString());
+    formData.append('id_docente', teacherId.toString());
     formData.append('perfil', file);
 
     return this.http.post(`${this.apiUrl}/docente/upload-profile/${teacherId}`, formData);

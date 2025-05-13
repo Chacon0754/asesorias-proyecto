@@ -60,9 +60,9 @@ export class TeacherHomeComponent implements OnInit {
         if (teacher) {
           const teacherData = teacher[0];
           this.teacher = {
-            id: teacherData.Id_docente,
+            id: teacherData.id_docente,
             name: teacherData.nombre_doc,
-            lastName1: teacherData.Apellido,
+            lastName1: teacherData.apellido,
             lastName2: teacherData.apei2,
             email: teacherData.correo,
             majorId: teacherData.id_carrera_mat,
