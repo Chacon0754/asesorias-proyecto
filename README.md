@@ -16,8 +16,8 @@ sudo apt install git node
 
 1. Clonar proyecto:
 ```sh
-git clone git@github.com:Chacon0755/UACH-AS.git
-cd UACH-AS
+git clone https://github.com/Chacon0754/asesorias-proyecto.git
+cd asesorias-proyecto
 ```
 
 3. Ejecutar el servidor:
