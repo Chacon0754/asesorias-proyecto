@@ -13,7 +13,7 @@ Esta es una aplicación web para agendar asesorías académicas, compuesta por:
 
 ## 2. Arquitectura general
 
-![[app.svg]]
+![App](./img/app.svg)
 
 * El **Frontend** se ejecuta por defecto en el puerto **4200**.
 * El **Backend** escucha en el puerto **3000**.
