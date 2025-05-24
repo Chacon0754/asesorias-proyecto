@@ -184,48 +184,38 @@ asesorias-proyecto/
 2. Inicia el servidor y comprueba en Postman o curl los endpoints listados.
 3. Arranca el Frontend y navega por la UI.
 
-```mermaid
-classDiagram
-    class Usuario {
-        +int id
-        +string nombre
-        +string role
-    }
+## 9. Requrimientos Funcionales
 
-    class Horario {
-        +int id
-        +int usuario_id
-        +Date fecha
-        +char disponible
-    }
+> [!NOTE]
+> Los **requerimientos funcionales** describen las funcionalidades específicas que el sistema debe realizar:
 
-    class Reserva {
-        +int id
-        +int horario_id
-        +int estudiante_id
-        +string estado
-    }
+1. RF01 – Registro de usuarios. El sistema debe permitir a estudiantes y asesores registrarse proporcionando nombre, correo y rol.
+2. RF02 – Autenticación. El sistema debe permitir iniciar sesión a los usuarios registrados con sus credenciales.
+3. RF03 – Gestión de horarios (asesores). Los asesores deben poder crear, modificar y eliminar horarios disponibles para asesorías.
+4. RF04 – Consulta de horarios (estudiantes). Los estudiantes deben poder ver los horarios disponibles de los asesores.
+5. RF05 – Reserva de asesorías. Los estudiantes deben poder reservar un horario disponible.
+6. RF06 – Cancelación de reservas. Los estudiantes deben poder cancelar una asesoría reservada y los asesores deben poder cancelar o rechazar reservas pendientes.
+7. RF07 – Confirmación de asesorías. El asesor puede confirmar una reserva realizada por un estudiante.
+8. RF08 – Visualización de reservas. Tanto estudiantes como asesores pueden visualizar sus reservas y horarios agendados.
 
-    Usuario "1" --> "0..*" Horario : crea
-    Usuario "1" --> "0..*" Reserva : solicita
-    Horario "1" --> "0..1" Reserva : esReservadoPor
-    Reserva "1" --> "1" Usuario : estudiante
-    Reserva "1" --> "1" Horario : horario
+## 10. Requerimientos No Funcionales
 
-```
+> [!NOTE]
+> Los **requerimientos no funcionales** describen cómo debe comportarse el sistema, sin detallar funcionalidad específica.
 
-```mermaid
-flowchart TD
-    A[Inicio] --> B{¿Usuario autenticado?}
-    B -- No --> C[Redirigir a login]
-    B -- Sí --> D[Mostrar horarios disponibles]
-    D --> E[Seleccionar horario]
-    E --> F{¿Horario disponible?}
-    F -- No --> G[Mostrar error]
-    F -- Sí --> H[Enviar solicitud de reserva]
-    H --> I[Guardar reserva en BD]
-    I --> J[Notificar asesor]
-    J --> K[Fin]
+1. RNF01 – Rendimiento. El sistema debe ser capaz de responder a una solicitud de usuarios.
+2. RNF02 – Escalabilidad. El sistema debe permitir aumentar la capacidad de usuarios concurrentes mediante despliegues en contenedores.
+3. RNF03 – Seguridad. Las contraseñas deben almacenarse cifradas y el acceso a los endpoints debe estar restringido por roles (estudiante/asesor/admin).
+4. RNF04 – Usabilidad. La interfaz debe ser intuitiva, accesible y compatible con dispositivos móviles.
+2. RNF05 – Interoperabilidad. El backend debe exponer una API RESTful para facilitar la integración con otros sistemas.
 
-```
+## Bibliografía
+
+- [Documentación de Node.js](https://nodejs.org/en/docs/)
+- [Documentación de Express.js](https://expressjs.com/)
+- [Documentación de Angular](https://angular.dev/docs)
+- [Documentación de Sequelize](https://sequelize.org/)
+- [Documentación de Docker](https://docs.docker.com/)
+- [Documentación de Git](https://git-scm.com/doc)
+- [Documentación de Oracle SQL](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/index.html)
 
