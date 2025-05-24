@@ -5,7 +5,7 @@
 > [!WARNING]
 > La aplicacion es un proyecto académico y no debe ser utilizado en producción.
 
-Esta es una aplicación web para agendar asesorías académicas, compuesta por:
+Esta es una aplicación web para agendar asesorías académicas con el nombre de `UACH_AS` (UACH Asesorías), compuesta por:
 
 * **Backend**: Servidor REST construido con Node.js y Express, que expone una API para gestionar usuarios, horarios y reservas de asesorías.
 * **Frontend**: Cliente desarrollado en Angular que consume la API para ofrecer la interfaz publica.
@@ -103,6 +103,8 @@ npm run start
 
 Luego abre en el navegador `http://localhost:4200`.
 
+![Casos de Uso](./img/caso_de_uso.svg)
+
 ## 5. Base de datos
 
 1. Crear las tablas necesarias (esquema de ejemplo, utilizar `script.sql`):
@@ -181,4 +183,49 @@ asesorias-proyecto/
 1. Levanta la base de datos y verifica la conexión desde Backend.
 2. Inicia el servidor y comprueba en Postman o curl los endpoints listados.
 3. Arranca el Frontend y navega por la UI.
+
+```mermaid
+classDiagram
+    class Usuario {
+        +int id
+        +string nombre
+        +string role
+    }
+
+    class Horario {
+        +int id
+        +int usuario_id
+        +Date fecha
+        +char disponible
+    }
+
+    class Reserva {
+        +int id
+        +int horario_id
+        +int estudiante_id
+        +string estado
+    }
+
+    Usuario "1" --> "0..*" Horario : crea
+    Usuario "1" --> "0..*" Reserva : solicita
+    Horario "1" --> "0..1" Reserva : esReservadoPor
+    Reserva "1" --> "1" Usuario : estudiante
+    Reserva "1" --> "1" Horario : horario
+
+```
+
+```mermaid
+flowchart TD
+    A[Inicio] --> B{¿Usuario autenticado?}
+    B -- No --> C[Redirigir a login]
+    B -- Sí --> D[Mostrar horarios disponibles]
+    D --> E[Seleccionar horario]
+    E --> F{¿Horario disponible?}
+    F -- No --> G[Mostrar error]
+    F -- Sí --> H[Enviar solicitud de reserva]
+    H --> I[Guardar reserva en BD]
+    I --> J[Notificar asesor]
+    J --> K[Fin]
+
+```
 
