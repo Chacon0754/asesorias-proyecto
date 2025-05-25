@@ -207,7 +207,17 @@ asesorias-proyecto/
 2. RNF02 – Escalabilidad. El sistema debe permitir aumentar la capacidad de usuarios concurrentes mediante despliegues en contenedores.
 3. RNF03 – Seguridad. Las contraseñas deben almacenarse cifradas y el acceso a los endpoints debe estar restringido por roles (estudiante/asesor/admin).
 4. RNF04 – Usabilidad. La interfaz debe ser intuitiva, accesible y compatible con dispositivos móviles.
-2. RNF05 – Interoperabilidad. El backend debe exponer una API RESTful para facilitar la integración con otros sistemas.
+5. RNF05 – Interoperabilidad. El backend debe exponer una API RESTful para facilitar la integración con otros sistemas.
+
+## 11. Modelos de la Base de Datos
+
+### Modelo Conceptual
+
+![Modelo Conceptual](./img/modelo_conceptual.jpg)
+
+### Modelo Lógico
+
+![Modelo Lógico](./img/modelo_logico.jpg)
 
 ## Bibliografía
 
