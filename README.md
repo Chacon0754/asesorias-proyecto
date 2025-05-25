@@ -19,7 +19,7 @@ Leer el manual tecnico y el manual de usuario para entender el funcionamiento de
 1. [NodeJS](https://nodejs.org)
 2. [Express](https://expressjs.com/)
 3. [Angular](https://angular.dev/)
-4. [Oracle Database 21c Express Edition](https://www.oracle.com/database/technologies/appdev/xe.html)
+4. [Oracle Database 21c Express Edition](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/index.html)
 
 ## Integrantes
 
