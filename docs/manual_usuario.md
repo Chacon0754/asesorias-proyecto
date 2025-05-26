@@ -1,4 +1,3 @@
-# Manual Usuario
 # Manual de Usuario - UACH_AS
 
 ## 1. Introducción
