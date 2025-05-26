@@ -4,6 +4,7 @@
 2. [Manual de Usuario](./docs/manual_usuario.md)
 3. [Base de Datos](./Backend/db/script.sql)
     - [Script de Creación de Tablas](./Backend/db/tables.sql)
+    - [Script de Creación DB](./Backend/db/uach-as.sql)
 
 Un servidor web creado con NodeJS y express de una pagina web donde se pueden agendar asesorias academicas.
 
