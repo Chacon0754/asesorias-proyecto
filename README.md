@@ -26,4 +26,4 @@ Leer el manual tecnico y el manual de usuario para entender el funcionamiento de
 
 - Martin Eduardo Chacon Orduño [Chacon0755](https://github.com/Chacon0755).
 - Oscar Joaquin Marquez Ortega [Oscar27-22](https://github.com/Oscar27-22).
-- Gustavo Adolfo Lazo Ramirez
+- Gustavo Adolfo Lazo Ramirez  [g-lazo](https://github.com/g-lazo).
